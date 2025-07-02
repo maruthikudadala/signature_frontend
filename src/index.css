@@ -1,0 +1,10 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@import 'react-pdf/dist/esm/Page/TextLayer.css';
+@import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
