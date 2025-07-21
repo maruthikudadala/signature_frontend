@@ -1,153 +1,118 @@
-
-
-// import React, { useState } from 'react';
-// import { Search } from 'lucide-react';
-// import UploadPdfFlow from './UploadPdfFlow';
-// import UploadAndSign from './UploadAndSign';
-// import Dashboard from './Dashboard';
-
-// function MainPage({ showNavbarOnlyHandler }) {
-//   const [view, setView] = useState("default");
-
-//   const handleUploadSuccess = () => {
-//     setView("dashboard");
-//   };
-
-//   return (
-//     <>
-//       {/* Navbar */}
-//       <nav className="fixed top-0 left-0 right-0 z-[1041] bg-[#f5f5fa] shadow-md h-[100px] w-full px-6 flex items-center justify-between">
-
-//         {/* Logo */}
-//         <div className="flex items-center w-[150px]">
-//           <img
-//             src="/support1.png"
-//             alt="Logo"
-//             className="w-[50px] h-[50px] rounded-full object-cover"
-//           />
-//         </div>
-
-//         {/* Search Bar */}
-//         <div className="flex items-center justify-center flex-grow ml-[150px]">
-//           <div className="flex items-center w-[600px]">
-//             <input
-//               type="text"
-//               placeholder="Search..."
-//               className="w-[400px] h-[40px] px-4 pl-10 text-[16px] border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
-//             />
-//             <Search className="ml-2 text-gray-500 border p-2 rounded-full h-[40px] w-[40px] cursor-pointer hover:text-blue-500" />
-//           </div>
-//         </div>
-
-//        {/* Right-Side Nav Actions */}
-//        <div className="nav-actions flex items-center h-full w-[420px] ml-auto text-[18px] leading-[18px] gap-10">
-//   <button
-//     onClick={() => setView("upload")}
-//     className="text-gray-700 hover:text-green-600 text-[18px] pl-[10px] bg-transparent border-none focus:outline-none cursor-pointer"
-//   >
-//     Upload PDF
-//   </button>
-//   <button
-//     onClick={() => setView("dashboard")}
-//     className="text-gray-700 hover:text-yellow-600 text-[18px] pl-[10px] bg-transparent border-none focus:outline-none cursor-pointer"
-//   >
-//     Document View
-//   </button>
-//   <button
-//     onClick={showNavbarOnlyHandler}
-//     className="text-gray-700 hover:text-white-600 text-[18px] pl-[10px] bg-transparent border-none focus:outline-none cursor-pointer"
-//   >
-//     Home
-//   </button>
-// </div>
-
-
-//       </nav>
-
-//       {/* Push content down below navbar */}
-//       <div className="pt-[120px] px-6">
-//         {/* {view === "upload" && <UploadAndSign onUploadSuccess={handleUploadSuccess} />} */}
-//         {view === "upload" && <UploadPdfFlow />}
-//         {view === "dashboard" && <Dashboard />}
-//       </div>
-//     </>
-//   );
-// }
-
-// export default MainPage;
-
-
-import React, { useState } from 'react';
-import { Search } from 'lucide-react';
-import UploadPdfFlow from './UploadPdfFlow';
-import UploadAndSign from './UploadAndSign';
-import Dashboard from './Dashboard';
+import React, { useState } from "react";
+import { Search, Menu, X } from "lucide-react";
+import UploadPdfFlow from "./UploadPdfFlow";
+import UploadAndSign from "./UploadAndSign";
+import Dashboard from "./Dashboard";
 
 function MainPage({ showNavbarOnlyHandler }) {
   const [view, setView] = useState("default");
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleUploadSuccess = () => {
     setView("dashboard");
   };
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <>
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-[1041] bg-[#f5f5fa] shadow-md h-[100px] w-full px-6 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-400   shadow-lg h-[80px] w-full px-4 md:px-8 flex items-center justify-between text-black">
         {/* Logo */}
-        <div className="flex items-center w-[150px]">
+        <div className="flex items-center">
           <img
             src="/support1.png"
             alt="Logo"
-            className="w-[50px] h-[50px] rounded-full object-cover"
+            className="w-12 h-12 rounded-full object-cover mr-2"
           />
+          <h1 className="font-bold text-xl hidden sm:block">DocuSign Clone</h1>
         </div>
 
-        {/* Search Bar */}
-        <div className="flex items-center justify-center flex-grow ml-[150px]">
-          <div className="flex items-center w-[600px]">
+        {/* Search */}
+        <div className=" md:flex items-center justify-center flex-grow mx-4">
+          <div className="relative w-full max-w-md">
             <input
               type="text"
               placeholder="Search..."
-              className="w-[400px] h-[40px] px-4 pl-10 text-[16px] border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full h-10 pl-10 pr-4 rounded-full text-gray-800 focus:ring-2 focus:ring-white outline-none"
             />
-            <Search className="ml-2 text-gray-500 border p-2 rounded-full h-[40px] w-[40px] cursor-pointer hover:text-blue-500" />
+            <Search className="absolute left-3 top-2.5 text-gray-500" />
           </div>
         </div>
 
-        {/* Right-Side Nav Actions */}
-        <div className="nav-actions flex items-center h-full w-[420px] ml-auto text-[18px] leading-[18px] gap-10">
+        {/* Desktop Nav */}
+        <div className=" md:flex items-center gap-6">
           <button
             onClick={() => setView("upload")}
-            className="text-gray-700 hover:text-green-600 text-[18px] pl-[10px] bg-transparent border-none focus:outline-none cursor-pointer"
+            className="hover:text-yellow-200 transition"
           >
             Upload PDF
           </button>
           <button
             onClick={() => setView("dashboard")}
-            className="text-gray-700 hover:text-yellow-600 text-[18px] pl-[10px] bg-transparent border-none focus:outline-none cursor-pointer"
+            className="hover:text-yellow-200 transition"
           >
             Document View
           </button>
           <button
             onClick={showNavbarOnlyHandler}
-            className="text-gray-700 hover:text-blue-600 text-[18px] pl-[10px] bg-transparent border-none focus:outline-none cursor-pointer"
+            className="hover:text-yellow-200 transition"
           >
             Home
           </button>
         </div>
+
+        {/* Hamburger Menu - Mobile */}
+        <div className="md:hidden flex items-center">
+          <button onClick={toggleMenu}>
+            {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+        </div>
       </nav>
 
-      {/* Push content down below navbar */}
-      <div className="pt-[120px] px-6">
+      {/* Mobile Dropdown Nav */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white text-black py-4 px-6 shadow-md absolute top-20 w-full z-40 space-y-3">
+          <button
+            onClick={() => {
+              setView("upload");
+              setIsMenuOpen(false);
+            }}
+            className="block w-full text-left"
+          >
+            Upload PDF
+          </button>
+          <button
+            onClick={() => {
+              setView("dashboard");
+              setIsMenuOpen(false);
+            }}
+            className="block w-full text-left"
+          >
+            Document View
+          </button>
+          <button
+            onClick={() => {
+              showNavbarOnlyHandler();
+              setIsMenuOpen(false);
+            }}
+            className="block w-full text-left"
+          >
+            Home
+          </button>
+        </div>
+      )}
+
+      {/* Page Content */}
+      <div className="pt-[100px] px-4 sm:px-8">
         {view === "upload" && <UploadPdfFlow />}
         {view === "dashboard" && <Dashboard />}
-
-        {/* 👇 Centered Welcome Message When No View Selected */}
         {view === "default" && (
-          <div className="flex justify-center items-center h-[calc(100vh-120px)]">
-            <h1 className="text-3xl font-bold text-gray-700 text-center">
-              Welcome! Upload a PDF to sign
+          <div className="flex justify-center items-center h-[calc(100vh-100px)]">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-800 text-center">
+              Welcome! Upload a PDF to sign.
             </h1>
           </div>
         )}

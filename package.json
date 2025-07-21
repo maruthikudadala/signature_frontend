@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "lucide-react": "^0.522.0",
     "pdfjs-dist": "^5.3.31",
     "react": "^19.1.0",

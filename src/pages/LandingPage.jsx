@@ -1,62 +1,3 @@
-// import React,{useState} from "react";
-
-// import Register from "../components/forms/Register";
-// import Navbar from "../components/Navbar";
-// import Login from "../components/forms/Login";
-// import MainPage from "../components/MainPage";
-
-
-// const LandingPage = ()=>{
-//     const [showRegister, setShowRegister] = useState(false)
-//     const [showLogin, setShowLogin] = useState(false)
-//     const [showMainPage,setMainPage] =useState(false)
-
-// const showRegisterHandler=()=>{
-//     setShowRegister(true)
-//     setShowLogin(false)
-//     setMainPage(false)
-// }
-// const showLoginHandler= ()=>{
-//     setShowLogin(true)
-//     setShowRegister(false)
-//     setMainPage(false)
-// }
-// const showMainPageHandler=()=>{
-//     setMainPage(true)
-//     setShowRegister(false)
-//     setShowLogin(false)
-// }
-// //after clicking home page on mainpage ,it comes return back to landing page(homepage)
-// const showNavbarOnlyHandler = () => {
-//     setShowRegister(false);
-//     setShowLogin(false);
-//     setMainPage(false);  // This will hide MainPage and only show Navbar
-//   };
-  
-
-//     return(
-//         <>
-//         <section className="landingSection">
-//             {/* <Navbar showRegisterHandler={showRegisterHandler} showLoginHandler={showLoginHandler}/> */}
-//     {/* Only show Navbar when not on MainPage */}
-//       {!showMainPage && (
-//         <Navbar
-//           showRegisterHandler={showRegisterHandler}
-//           showLoginHandler={showLoginHandler}
-//         />
-//       )}
-
-//             {showRegister && <Register showLoginHandler={showLoginHandler}/>} {/* after registration , login page chopinchali */}
-//             {showLogin && <Login showMainPageHandler ={showMainPageHandler}/>}
-//             {showMainPage && <MainPage showNavbarOnlyHandler={showNavbarOnlyHandler}/> }
-//         </section>
-       
-//         </>
-//     )
-// }
-// export default LandingPage
-
-
 import React, { useState } from "react";
 import Register from "../components/forms/Register";
 import Navbar from "../components/Navbar";
@@ -86,16 +27,15 @@ const LandingPage = () => {
     setShowLogin(false);
   };
 
-  // After clicking home on mainpage, return back to landing page
   const showNavbarOnlyHandler = () => {
     setShowRegister(false);
     setShowLogin(false);
-    setMainPage(false); // This will hide MainPage and only show Navbar
+    setMainPage(false);
   };
 
   return (
     <>
-      <section className="landingSection min-h-screen">
+      <section className="landingSection min-h-screen bg-gradient-to-br from-indigo-100 to-white">
         {/* Show Navbar only if not on MainPage */}
         {!showMainPage && (
           <Navbar
@@ -105,16 +45,30 @@ const LandingPage = () => {
         )}
 
         {/* Views */}
-        {showRegister && <Register showLoginHandler={showLoginHandler} />}
-        {showLogin && <Login showMainPageHandler={showMainPageHandler} />}
-        {showMainPage && <MainPage showNavbarOnlyHandler={showNavbarOnlyHandler} />}
+        <div className="flex flex-col items-center justify-center p-4">
+          {showRegister && (
+            <div className="w-full shadow-lg rounded-xl  mt-6">
+              <Register showLoginHandler={showLoginHandler} />
+            </div>
+          )}
+          {showLogin && (
+            <div className="w-full shadow-lg rounded-xl  mt-6">
+              <Login showMainPageHandler={showMainPageHandler} />
+            </div>
+          )}
+          {showMainPage && (
+            <MainPage showNavbarOnlyHandler={showNavbarOnlyHandler} />
+          )}
 
-        {/* Show Welcome Message if nothing else is visible */}
-        {!showRegister && !showLogin && !showMainPage && (
-          <div className="flex justify-center items-center h-[calc(100vh-100px)]">
-            <h1 className="text-3xl font-bold text-gray-700">Welcome to Signature App</h1>
-          </div>
-        )}
+          {/* Welcome screen */}
+          {!showRegister && !showLogin && !showMainPage && (
+            <div className="flex justify-center items-center h-[calc(100vh-100px)] w-full">
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600 text-center p-4">
+                Welcome to Signature App
+              </h1>
+            </div>
+          )}
+        </div>
       </section>
     </>
   );
